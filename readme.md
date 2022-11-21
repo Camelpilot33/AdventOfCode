@@ -1,2 +1,1 @@
-#Advent of Code 
-js
+#Advent of Code
