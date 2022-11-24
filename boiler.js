@@ -1,3 +1,1 @@
-const fs = require('fs')
-let input = fs.readFileSync(String(__dirname).replace(/\\/g,'/')+"/inputs/_.txt", "utf8")
-input=input.split('\n').map(Number)
+const input = require('fs').readFileSync(String(__dirname).replace(/\\/g,'/')+"/inputs/day5.txt", "utf8").replace(/\r/g,'').split("\n")
