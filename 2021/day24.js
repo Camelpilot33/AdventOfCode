@@ -6,32 +6,29 @@ input=input.map(e=>("inp w"+e).split('\n').map(e=>e.split(' '))).map((e,i)=>{
     if (e[e.length-1][0]=='') e.pop()
     return e
 })
-console.log(" n",input[0].map(e=>e[0]).join(' '.repeat(8)))
-for (let i in input) {
-    if(i<10)i=" "+i
-    console.log(i,input[parseInt(i)]
-        .map(e=>e.slice(1)[1]
-            .padStart(5,' ').padEnd(10,' ')
-        ).join('')
-    )
-}
-console.log("\n\n")
 const c=(a,b)=>{
-    let n=String(parseInt(input[a][2][2])+parseInt(input[b][1][2]))
-    console.log(
-        "w"+a,
-        n[0]=="-"?n:"+"+n,
-        "= w"+b
-    )
+    let n=parseInt(input[a][2][2])+parseInt(input[b][1][2])
+    return n
 }
-//pairings
-c(0,13)
-c(1,12)
-c(2,3)
-c(4,5)
-c(6,7)
-c(8,11)
-c(9,10)
-//99995969919326
-//48111514719111
-//console.log(input)
+
+let inp=input.map(e=>e[0][2]) 
+let stack=[]
+let pairs=[]
+for (let i in inp){
+    if (inp[i]=="1") stack.push(i)
+    else {
+        pairs.push([stack.pop(),i])
+    }
+}
+let big=new Array(14).fill(9)
+let small=new Array(14).fill(1)
+for (let pair of pairs) {
+    let d=c(...pair)
+    if (d>0) big[pair[0]]-=d
+    else big[pair[1]]+=d
+    if (d>0) small[pair[1]]+=d
+    else small[pair[0]]-=d
+
+}
+console.log("1: "+big.join(''))
+console.log("2: "+small.join(''))
