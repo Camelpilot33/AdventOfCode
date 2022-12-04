@@ -14,5 +14,6 @@ for (let i of input) {
         l[2]=i
     }
 }
+
 console.log(Math.max(...input))
 console.log(l.reduce((ps, a) => ps + a, 0))
