@@ -6,7 +6,7 @@ Object.defineProperties(Array.prototype, {
 });
 
 const input = require('fs').readFileSync(String(__dirname)
-    .replace(/\\/g, '/') + "/inputs/day5.txt", "utf8").replace(/\r/g, '')
+    .replace(/\\/g, '/') + "/inputs/dayX.txt", "utf8").replace(/\r/g, '')
     .split("\n");
 
 
