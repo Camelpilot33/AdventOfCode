@@ -11,6 +11,7 @@ let input = require('fs').readFileSync(String(__dirname)
 .replace(/\\/g, '/') + "/inputs/day8.txt", "utf8").replace(/\r/g, '')
 .split("\n").map(e=>e.split('').map(Number))
 let s=2*input.length+(2*input[0].length)-4
+let p = -1;
 for (let i=1;i<input.length-1;i++) {
     for (let j = 1; j < input[0].length - 1; j++) {
         let v = [true, true, true, true]
@@ -27,12 +28,7 @@ for (let i=1;i<input.length-1;i++) {
            if (input[k][j] >= input[i][j]){v[3]=false}
         }
         if (v.includes(true))s++
-    }
-}
-let p = 0;
-for (let i = 0; i < input.length; i++) {
-    for (let j = 0; j < input[0].length; j++) {
-        let v = [0, 0, 0, 0];
+        v = [0, 0, 0, 0];
         for (let k = j - 1; k >= 0; k--) {
             v[0]++;
             if (input[i][k] >= input[i][j]) { break; }
