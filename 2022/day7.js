@@ -7,18 +7,18 @@ let input = require('fs').readFileSync(String(__dirname)
 .replace(/\\/g, '/') + "/inputs/day7.txt", "utf8").replace(/\r/g, '').replace(/\$ ls\n/g,'')
     .split('\n')
 
-let x={0:[NaN,[]]}//dir:[base,[..elem]]
+let x={"0":[NaN,[]]}//dir:[base,[..elem]]
 var dir="0"
 for (var i=0;i<input.length;i++) {
     if (input[i][0]=="$"){
         if (input[i][input[i].length-1]=="/") dir="0"
-        else if (input[i].split(' ')[2] == "..") 10//dir = x[dir][0]
+        else if (input[i].split(' ')[2] == "..") dir = x[dir][0]
         else {
-            dir = input[i].split(' ')[2]
+            dir = input[i].split(' ')[2]+dir
         }
-    } else if (input[i].split(' ')[0]=="dir") {
-        x[input[i].split(' ')[1]] = [dir, []]
-        x[dir][1].push(input[i].split(' ')[1])
+    } else if (input[i].split(' ')[0]=='dir') {
+        x[input[i].split(' ')[1]+dir] = [dir, []]
+        x[dir][1].push(input[i].split(' ')[1]+dir)
     } else {
         x[dir][1].push(parseInt(input[i].split(' ')[0]))
     }
@@ -40,9 +40,9 @@ for (var i of Object.values(a)) {
     if (i <= 100000) sum+=i
 }
 console.log(sum)
-limit = Object.values(a).sum()-4*10**7
+limit = a[0]-4*10**7
 let b=[]
 for (var i of Object.values(a)) {
-    if (i > 100000) b.push(i);
+    if (i > limit) b.push(i);
 }
 console.log(Math.min(...b))
