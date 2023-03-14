@@ -1,8 +1,0 @@
-{
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": false,
-    "editor.formatOnType": false,
-    "javascript.format.insertSpaceAfterConstructor": true,
-    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-    "javascript.format.semicolons": "insert"
-}
