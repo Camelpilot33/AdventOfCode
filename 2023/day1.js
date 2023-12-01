@@ -26,9 +26,11 @@ const abc = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const input = require('fs').readFileSync(`${String(__dirname).replace(/\\/g, '/')}/inputs/${__filename.split('\\')[__filename.split('\\').length - 1].split('.')[0]}.txt`, 'utf8').replace(/\r/g, '');
 
 console.log(
-    input
-    .split('\n').map(e=>e.split('').filter(e=>Number(e)==e).join('')).map(e=>e.length>1?Number(e[0]+e[e.length-1]):Number(e[0]+e[0])).sum()
+    input.split('\n').map(e=>e.split('').filter(e=>Number(e)==e).join('')).map(e=>e.length>1?Number(e[0]+e[e.length-1]):Number(e[0]+e[0])).sum()
 )
+
+
+
 function reverseString(str) {
     return str.split("").reverse().join("");
 }
