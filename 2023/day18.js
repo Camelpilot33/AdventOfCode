@@ -21,9 +21,32 @@ const mergeint = intervals => {
     result.push(previous);
     return result;
 };
-const gcd = (alpha, beta) => alpha ? gcd(beta % alpha, alpha) : beta;
-const lcm = (alpha, beta) => alpha * beta / gcd(alpha, beta);
 const minAreaRect = (points) => (Math.max(...points.map(e => e[0])) - Math.min(...points.map(e => e[0]))) * (Math.max(...points.map(e => e[1])) - Math.min(...points.map(e => e[1])));
 const abc = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const log = (...alpha) => { for (beta of alpha) console.log(JSON.stringify(beta, null, 2)) }
+const log = (...a) => { for (b of a) console.log(JSON.stringify(b, null, 2)) }
 const input = require('fs').readFileSync(`${String(__dirname).replace(/\\/g, '/')}/inputs/${__filename.split('\\')[__filename.split('\\').length - 1].split('.')[0]}.txt`, 'utf8').replace(/\r/g, '');
+
+let a=input.split('\n')
+let [x,y]=[0,0]
+const pts = [];
+let p = 0;
+for (i in a) {
+    //p1:
+    // let [dir,l]=["RDLU".split('').indexOf(a[i].split(' ')[0]),Number(a[i].split(' ')[1])]
+
+    //p2:
+    const inst = a[i].split('#')[1].slice(0,-1)
+    let [l,dir]=[parseInt(inst.slice(0, -1), 16),parseInt(inst.slice(-1))]
+
+    if (dir==0)x+=l
+    if (dir==1)y+=l
+    if (dir==2)x-=l
+    if (dir==3)y-=l
+    p += l;
+    pts.push([x, y]);
+}
+let s=p
+for (let i = 0; i < pts.length - 1; i++) {
+    s += pts[i][0] * pts[i + 1][1] - pts[i + 1][0] * pts[i][1];
+}
+log(Math.floor(s / 2) + 1);

@@ -21,9 +21,34 @@ const mergeint = intervals => {
     result.push(previous);
     return result;
 };
-const gcd = (alpha, beta) => alpha ? gcd(beta % alpha, alpha) : beta;
-const lcm = (alpha, beta) => alpha * beta / gcd(alpha, beta);
+const gcd = (a, b) => a ? gcd(b % a, a) : b;
+const lcm = (a, b) => a * b / gcd(a, b);
 const minAreaRect = (points) => (Math.max(...points.map(e => e[0])) - Math.min(...points.map(e => e[0]))) * (Math.max(...points.map(e => e[1])) - Math.min(...points.map(e => e[1])));
 const abc = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const log = (...alpha) => { for (beta of alpha) console.log(JSON.stringify(beta, null, 2)) }
+const log = (...a)=>{for(b of a)console.log(JSON.stringify(b, null, 2))}
 const input = require('fs').readFileSync(`${String(__dirname).replace(/\\/g, '/')}/inputs/${__filename.split('\\')[__filename.split('\\').length - 1].split('.')[0]}.txt`, 'utf8').replace(/\r/g, '');
+
+let a=input.split('\n').map(e=>e.replace(/S/g,'.').split(''))
+let dim=a.length/2-0.5
+let n=(26501365-dim)/(2*dim+1)
+
+let q=[[dim,dim,0]]
+let visited=[]
+while (q.length) {
+    let [x,y,p]=q.shift()
+    if (!(visited.map(e=>e[0]).includes(x+','+y))) {
+        visited.push([x+','+y,p])
+        if (x>0&&a[x-1][y]==".") q.push([x-1,y,p+1])
+        if (x<a.length-1&&a[x+1][y]==".") q.push([x+1,y,p+1])
+        if (y>0&&a[x][y-1]==".") q.push([x,y-1,p+1])
+        if (y<a[0].length-1&&a[x][y+1]==".") q.push([x,y+1,p+1])
+    }
+}
+let sqe=visited.filter(e=>e[1]%2==0).length
+let sqo=visited.filter(e=>e[1]%2==1).length
+let outero=visited.filter(e=>e[1]%2==1&&e[1]>dim).length
+let outere=visited.filter(e=>e[1]%2==0&&e[1]>dim).length
+log(
+    sqe-outere,
+    (n+1)**2*sqo+n**2*sqe-(n+1)*outero+n*outere,
+)
