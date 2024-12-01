@@ -3,7 +3,8 @@ Object.defineProperties(Array.prototype, {
     sortf: { value: function () { return this.sort((a, b) => a - b); } },
     prod: { value: function () { return this.map(Number).reduce((p, a) => p * a, 1); } },
     rotate: { value: function (n) { n = n % this.length; while (this.length && n < 0) n += this.length; this.push.apply(this, this.splice(0, n)); return this; } },
-    firstn: { value: function (n) { return n >= 0 ? this.sort((a, b) => b - a).slice(0, n) : []; } }
+    firstn: { value: function (n) { return n >= 0 ? this.sort((a, b) => b - a).slice(0, n) : []; } },
+    occur: { value: function () { return this.reduce((acc, curr) => { acc[curr] = acc[curr] + 1 || 1; return acc }, {}); } }
 });
 Number.prototype.mod = function (n) { return ((this % n) + n) % n; };
 const mergeint = intervals => {
