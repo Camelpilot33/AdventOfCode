@@ -49,9 +49,6 @@ let dir = startdir;
 
 visited = new Set();
 visited.add(`${pos[0]},${pos[1]}`);
-const turnRight = (d) => {
-    return (d + 1) % 4;
-};
 const ingrid = (row, col) => row >= 0 && row < grid.length && col >= 0 && col < grid[0].length;
 
 while (true) {
@@ -68,9 +65,7 @@ while (true) {
     }
 }
 
-console.log(
-    visited.size,
-)
+console.log(visited.size)
 
 let loops = (obs) => {
     let temp = grid.map(e => e.map(e => e));
@@ -95,6 +90,7 @@ let loops = (obs) => {
 let loopPositions = 0;
 for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[0].length; j++) {
+        if (!visited.has(`${i},${j}`)) continue;
         if (grid[i][j] == '#') continue;
         if (i == startpos[0] && j == startpos[1]) continue;
         if (loops([i, j])) {
@@ -102,4 +98,4 @@ for (let i = 0; i < grid.length; i++) {
         }
     }
 }
-console.log(loopPositions); //10.618s :(
+console.log(loopPositions); //2.116s :(
